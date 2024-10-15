@@ -11,12 +11,10 @@ submitBtn = document.querySelector('.submitBtn'),
  formInputFields = document.querySelectorAll('form input'),
   uploadimg = document.querySelector("#uploadimg"),
   fName = document.getElementById("fName"),
-  lName = document.getElementById("lName"),
+
   age = document.getElementById("age"),
-  city = document.getElementById("city"),
   position = document.getElementById("position"),
-  salary = document.getElementById("salary"),
-  sDate = document.getElementById("sDate"),
+
   email = document.getElementById("email"),
   phone = document.getElementById("phone"),
   entries = document.querySelector(".showEntries"),
@@ -154,16 +152,16 @@ function showInfo(){
                 <td><img src="${staff.picture}" alt="" width="40" height="40"></td>
                 <td>${staff.fName}</td>
                 <td>${staff.ageVal}</td>
-                <td>${staff.cityVal}</td>
+
                 <td>${staff.positionVal}</td>
 
-                <td>${staff.sDateVal}</td>
+
                 <td>${staff.emailVal}</td>
                 <td>${staff.phoneVal}</td>
                 <td>
-                    <button onclick="readInfo('${staff.picture}', '${staff.fName}', '${staff.lName}', '${staff.ageVal}', '${staff.cityVal}', '${staff.positionVal}', '${staff.sDateVal}', '${staff.emailVal}', '${staff.phoneVal}')"><i class="fa-regular fa-eye"></i></button>
+                    <button onclick="readInfo('${staff.picture}', '${staff.fName}', '${staff.ageVal}',  '${staff.positionVal}', '${staff.emailVal}', '${staff.phoneVal}')"><i class="fa-regular fa-eye"></i></button>
 
-                    <button onclick="editInfo('${i}', '${staff.picture}', '${staff.fName}', '${staff.lName}', '${staff.ageVal}', '${staff.cityVal}', '${staff.positionVal}', '${staff.sDateVal}', '${staff.emailVal}', '${staff.phoneVal}')"><i class="fa-regular fa-pen-to-square"></i></button>
+                    <button onclick="editInfo('${i}', '${staff.picture}', '${staff.fName}', '${staff.ageVal}',  '${staff.positionVal}', '${staff.emailVal}', '${staff.phoneVal}')"><i class="fa-regular fa-pen-to-square"></i></button>
 
 
                     <button onclick = "deleteInfo(${i})"><i class="fa-regular fa-trash-can"></i></button>
@@ -186,14 +184,14 @@ function showInfo(){
 showInfo()
 
 
-function readInfo(pic, fname, lname, Age, City, Position, SDate, Email, Phone){
+function readInfo(pic, fname, lname, Age, Position, Email, Phone){
     imgInput.src = pic
     fName.value = fname
-    lName.value = lname
+
     age.value = Age
-    city.value = City
+
     position.value = Position
-    sDate.value = SDate
+
     email.value = Email
     phone.value = Phone
 
@@ -209,7 +207,7 @@ function readInfo(pic, fname, lname, Age, City, Position, SDate, Email, Phone){
     imgHolder.style.pointerEvents = "none"
 }
 
-function editInfo(id, pic, fname, lname, Age, City, Position, SDate, Email, Phone){
+function editInfo(id, pic, fname, Age, Position, Email, Phone){
     isEdit = true
     editId = id
 
@@ -221,22 +219,22 @@ function editInfo(id, pic, fname, lname, Age, City, Position, SDate, Email, Phon
         id: id,
         picture: pic,
         fName: fname,
-        lName: lname,
+
         ageVal: Age,
-        cityVal: City,
+
         positionVal: Position,
-        sDateVal: SDate,
+
         emailVal: Email,
         phoneVal: Phone
     }
 
     imgInput.src = pic
     fName.value = fname
-    lName.value = lname
+
     age.value = Age
-    city.value = City
+
     position.value = Position
-    sDate.value = SDate
+
     email.value = Email
     phone.value = Phone
 
@@ -302,11 +300,11 @@ form.addEventListener('submit', (e)=> {
         id: Date.now(),
         picture: imgInput.src == undefined ? "./img/pic1.png" :imgInput.src,
         fName: fName.value,
-        lName: lName.value,
+
         ageVal: age.value,
-        cityVal: city.value,
+
         positionVal: position.value,
-        sDateVal: sDate.value,
+
         emailVal: email.value,
         phoneVal: phone.value
     }
@@ -423,13 +421,11 @@ filterData.addEventListener("input", ()=> {
     if(searchTerm !== ""){
 
         const filteredData = originalData.filter((item) => {
-            const fullName = (item.fName + " " + item.lName).toLowerCase()
-            const city = item.cityVal.toLowerCase()
+            const fullName = (item.fName).toLowerCase()
             const position = item.positionVal.toLowerCase()
 
             return(
                 fullName.includes(searchTerm) ||
-                city.includes(searchTerm) ||
                 position.includes(searchTerm)
             )
         })
